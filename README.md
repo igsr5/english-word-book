@@ -13,3 +13,11 @@
 - フロントはvue.js、サーバーはRailsで作成する。
 - 単語の翻訳には「Google Cloud Translation API」を用いる。
 https://cloud.google.com/translate?hl=ja
+
+# 環境構築
+```
+# ルートディレクトリで行う
+$ sourse env.sh
+$ build
+$ up
+```
