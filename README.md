@@ -15,6 +15,8 @@
 https://cloud.google.com/translate?hl=ja
 
 # 環境構築
+- dockerコマンドなどをenv.shにaliasとしてまとめてある。  
+- ルートディレクトリに別途「Cloud Translation API」のjsonファイルを配置する。その際、名前はcloud-translation.jsonにしておく。
 ```
 # ルートディレクトリで行う
 $ sourse env.sh
