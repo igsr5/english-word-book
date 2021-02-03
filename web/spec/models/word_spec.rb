@@ -11,4 +11,19 @@ RSpec.describe Word, type: :model do
       expect(@word).to be_valid
     end
   end
+
+  describe 'failed create word' do
+    context 'nothing params' do
+      before do
+        @word = Word.new
+        @word.valid?
+      end
+
+      it 'is invalid by presence: true' do
+        expect(@word.errors).to be_key(:origin)
+        expect(@word.errors).to be_key(:text)
+        expect(@word.errors).to be_key(:user)
+      end
+    end
+  end
 end
