@@ -1,13 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:valid_user) { User.new(name: '山田太郎', email: 'taro@example.com', password: 'password', password_confirmation: 'password') }
   describe 'success create user' do
-    before do
-      @user = User.new(name: '山田太郎', email: 'taro@example.com', password: 'password', password_confirmation: 'password')
-    end
-
     it 'is valid user save' do
-      expect(@user).to be_valid
+      expect(valid_user).to be_valid
     end
   end
 
@@ -28,7 +25,7 @@ RSpec.describe User, type: :model do
 
     context 'not uniqu email' do
       before do
-        User.create(name: '山田太郎', email: 'taro@example.com', password: 'password', password_confirmation: 'password')
+        valid_user.save
         @user = User.new(name: '山田太郎', email: 'taro@example.com', password: 'password', password_confirmation: 'password')
         @user.valid?
       end
