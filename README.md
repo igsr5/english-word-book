@@ -22,5 +22,6 @@ https://cloud.google.com/translate?hl=ja
 # ルートディレクトリで行う
 $ sourse env.sh
 $ build
+$ rails db:create
 $ up
 ```
