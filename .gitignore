@@ -1,2 +1,3 @@
-# Cloud Translation API KEY
-cloud-translation.json
+# CloudTranslation API KEY
+/config/google-cloud.json
+.env

@@ -6,7 +6,7 @@
 # 機能
 - 英語<=>日本語で文章、単語を翻訳することができる。
 - 調べた単語がそのまま単語帳になって見ることができる。
-- 書く単語ごとに何回調べたかがカウントされていく。
+- 各単語ごとに何回調べたかがカウントされていく。
 - 英単語に登録されたものの中から、自分だけの問題集を作ることができる。
 
 # 実装
@@ -16,7 +16,8 @@ https://cloud.google.com/translate?hl=ja
 
 # 環境構築
 - dockerコマンドなどをenv.shにaliasとしてまとめてある。  
-- ルートディレクトリに別途「Cloud Translation API」のjsonファイルを配置する。その際、名前はcloud-translation.jsonにしておく。
+- web/configに別途「Cloud Translation API」より発行されたjsonファイルを配置する。その際、名前はgoogle-cloud.jsonにしておく。
+- .env.sampleの.sampleを削除し、`CLOUD_PROJECT_ID`の値を書き換える。(google-cloud.json参照)
 ```
 # ルートディレクトリで行う
 $ sourse env.sh
