@@ -2,13 +2,27 @@ require 'rails_helper'
 
 RSpec.describe Word, type: :model do
   let(:user) { User.create(name: '山田太郎', email: 'taro@example.com', password: 'password', password_confirmation: 'password') }
+  let(:word) { Word.new(origin: 'Hello', text: 'こんにちは', user_id: user.id )
+}
 
   describe 'success create word' do
-    before do
-      @word = Word.new(origin: 'Hello', text: 'こんにちは', user_id: user.id)
+    context 'can create word' do
+      before do
+        @word = Word.new(origin: 'Hello', text: 'こんにちは', user_id: user.id)
+      end
+      it 'is valid word save' do
+        expect(@word).to be_valid
+      end
     end
-    it 'is valid word save' do
-      expect(@word).to be_valid
+
+    context 'can get user' do
+      before do
+        @user = word.user
+      end
+
+      it 'can get user' do
+        expect(@user).to eq(user)
+      end
     end
   end
 
