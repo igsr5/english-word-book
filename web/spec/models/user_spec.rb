@@ -37,5 +37,16 @@ RSpec.describe User, type: :model do
         expect(@user.errors).to be_key(:email)
       end
     end
+
+    context 'not match passowrd and password_confirmation' do
+      before do
+        @user = User.new(name: '山田太郎', email: 'taro@example.com', password: 'password', password_confirmation: '12345678')
+        @user.valid?
+      end
+
+      it 'is invalid with no match password' do
+        expect(@user.errors).to be_key(:password_confirmation)
+      end
+    end
   end
 end
