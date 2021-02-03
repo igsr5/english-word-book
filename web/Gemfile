@@ -28,6 +28,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Cloud Translation
 gem 'google-cloud-translate'
 
+gem 'bcrypt'
+
 # dotenv
 gem 'dotenv-rails'
 
