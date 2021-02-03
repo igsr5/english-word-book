@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
         @user.valid?
       end
 
-      it 'is invalid with nothing params' do
+      it 'is invalid by presence: true' do
         expect(@user.errors).to be_key(:name)
         expect(@user.errors).to be_key(:email)
         expect(@user.errors).to be_key(:password)
