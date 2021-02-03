@@ -25,5 +25,16 @@ RSpec.describe Word, type: :model do
         expect(@word.errors).to be_key(:user)
       end
     end
+
+    context 'not found user' do
+      before do
+        @word = Word.new(origin: 'Hello', text: 'こんにちは', user_id: 99999)
+        @word.valid?
+      end
+
+      it 'is invalid by belongs_to :user' do
+        expect(@word.errors).to be_key(:user)
+      end
+    end
   end
 end
