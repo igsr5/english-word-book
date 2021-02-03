@@ -6,6 +6,19 @@ RSpec.describe User, type: :model do
     it 'is valid user save' do
       expect(valid_user).to be_valid
     end
+
+    context 'can get words' do
+      before do
+        3.times do
+          Word.create(origin: 'Hello', text: 'こんにちは', user_id: valid_user.id)
+        end
+        @words = Word.where(user_id = valid_user.id)
+      end
+
+      it 'can get words' do
+        expect(valid_user.words).to eq(@words)
+      end
+    end
   end
 
   describe 'failed create user' do
