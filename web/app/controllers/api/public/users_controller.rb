@@ -25,7 +25,9 @@ module Api
       end
 
       def destroy
-
+        user = User.find(params[:id])
+        user.destroy
+        render json: { data: user, message: 'SUCCESS'}
       end
 
       private
