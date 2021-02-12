@@ -12,7 +12,12 @@ module Api
       end
 
       def create
-
+        user = User.new(user_param)
+        if user.save
+          render json: { data: user, message: 'SUCCESS' }
+        else
+          render json: { message: user.errors }
+        end
       end
 
       def update
@@ -21,6 +26,12 @@ module Api
 
       def destroy
 
+      end
+
+      private
+
+      def user_param
+        params.require(:user).permit(:name, :email, :password, :password_confirmation)
       end
     end
   end
