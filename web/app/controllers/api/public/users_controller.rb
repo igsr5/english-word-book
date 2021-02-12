@@ -7,7 +7,8 @@ module Api
       end
 
       def show
-        User.find(params[:id])
+        user = User.find(params[:id])
+        render json: { data: user, message: 'SUCCESS'}
       end
 
       def create
