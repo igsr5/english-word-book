@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
   describe 'success create user' do
     it 'is valid user save' do
       expect(valid_user).to be_valid
+      expect(valid_user.email).to eq('taro1@example.com')
     end
 
     context 'can get words' do
@@ -37,7 +38,7 @@ RSpec.describe User, type: :model do
 
     context 'not uniqu email' do
       before do
-        valid_user.save
+        User.create(name: '山田太郎', email: 'taro@example.com', password: 'password', password_confirmation: 'password')
         @user = User.new(name: '山田太郎', email: 'taro@example.com', password: 'password', password_confirmation: 'password')
         @user.valid?
       end
