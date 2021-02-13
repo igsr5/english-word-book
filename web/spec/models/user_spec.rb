@@ -12,12 +12,10 @@ RSpec.describe User, type: :model do
         3.times do
           Word.create(origin: 'Hello', text: 'こんにちは', user_id: valid_user.id)
         end
-        #@words = Word.where(user_id = valid_user.id)
       end
 
       it 'can get words' do
         expect(Word.all).to eq(valid_user.words)
-        #expect(valid_user.words).to eq(@words)
       end
     end
   end
