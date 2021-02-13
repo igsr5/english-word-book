@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:valid_user) { User.new(name: '山田太郎', email: 'taro@example.com', password: 'password', password_confirmation: 'password') }
+  let(:valid_user) { FactoryBot.create(:user) }
   describe 'success create user' do
     it 'is valid user save' do
       expect(valid_user).to be_valid
@@ -12,11 +12,12 @@ RSpec.describe User, type: :model do
         3.times do
           Word.create(origin: 'Hello', text: 'こんにちは', user_id: valid_user.id)
         end
-        @words = Word.where(user_id = valid_user.id)
+        #@words = Word.where(user_id = valid_user.id)
       end
 
       it 'can get words' do
-        expect(valid_user.words).to eq(@words)
+        expect(Word.all).to eq(valid_user.words)
+        #expect(valid_user.words).to eq(@words)
       end
     end
   end
