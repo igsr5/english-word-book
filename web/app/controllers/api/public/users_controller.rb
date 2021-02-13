@@ -21,7 +21,14 @@ module Api
       end
 
       def update
+        user = User.find(params[:id])
+        #if user.update(name: params[:user][:name], email: params[:user][:email])
+        if user.update(user_param)
+          render json: { data: user, message: 'SUCCESS' }
+        else
+          render json: { message: user.errors }
 
+        end
       end
 
       def destroy
@@ -38,4 +45,3 @@ module Api
     end
   end
 end
-
