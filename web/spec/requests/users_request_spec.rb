@@ -19,4 +19,20 @@ RSpec.describe 'Users', type: :request do
       expect(@json['data'].length).to eq(10)
     end
   end
+
+  context 'GET: api/uers/:id' do
+    before do
+      @user = user
+      get "/api/users/#{@user.id}"
+      @json = JSON.parse(response.body)
+    end
+
+    it 'status is 200' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'can get the user' do
+      expect(@json['data']['id']).to eq(@user.id)
+    end
+  end
 end
