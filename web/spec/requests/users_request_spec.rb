@@ -9,7 +9,6 @@ RSpec.describe 'Users', type: :request do
     before do
       users
       get '/api/users'
-      @json = JSON.parse(response.body)
     end
 
     it 'status is 200' do
@@ -17,7 +16,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     it 'can get 10 users' do
-      expect(@json['data'].length).to eq(10)
+      expect(json['data'].length).to eq(10)
     end
   end
 
@@ -25,7 +24,6 @@ RSpec.describe 'Users', type: :request do
     before do
       @user = user
       get "/api/users/#{@user.id}"
-      @json = JSON.parse(response.body)
     end
 
     it 'status is 200' do
@@ -33,7 +31,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     it 'can get the user' do
-      expect(@json['data']['id']).to eq(@user.id)
+      expect(json['data']['id']).to eq(@user.id)
     end
   end
 
@@ -49,7 +47,6 @@ RSpec.describe 'Users', type: :request do
       }
 
       post '/api/users', params: @params
-      @json = JSON.parse(response.body)
     end
 
     it 'status is 200' do
@@ -57,7 +54,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     it 'can create the user' do
-      expect(@json['data']['email']).to eq(@params[:user][:email])
+      expect(json['data']['email']).to eq(@params[:user][:email])
     end
   end
 
@@ -80,6 +77,13 @@ RSpec.describe 'Users', type: :request do
     it 'can update the user' do
       expect(json['data']['name']).to eq(@params[:user][:name])
       expect(json['data']['name']).not_to eq(@user.name)
+    end
+  end
+
+  context 'DELETE: /api/users/:id' do
+    before do
+      @user = user
+      delete "/api/users#{@user}"
     end
   end
 end
