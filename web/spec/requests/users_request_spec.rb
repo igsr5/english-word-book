@@ -83,7 +83,16 @@ RSpec.describe 'Users', type: :request do
   context 'DELETE: /api/users/:id' do
     before do
       @user = user
-      delete "/api/users#{@user}"
+      delete "/api/users/#{@user.id}"
+    end
+
+    it 'status is 200' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'can delete the user' do
+      expect(User.find_by(id: @user.id)).to be_nil
+      expect(json['message']).to eq('SUCCESS')
     end
   end
 end
