@@ -17,6 +17,7 @@ RSpec.describe 'Users', type: :request do
 
     it 'can get 10 users' do
       expect(json['data'].length).to eq(10)
+      expect(json['message']).to eq('SUCCESS')
     end
   end
 
@@ -32,6 +33,7 @@ RSpec.describe 'Users', type: :request do
 
     it 'can get the user' do
       expect(json['data']['id']).to eq(@user.id)
+      expect(json['message']).to eq('SUCCESS')
     end
   end
 
@@ -55,6 +57,7 @@ RSpec.describe 'Users', type: :request do
 
     it 'can create the user' do
       expect(json['data']['email']).to eq(@params[:user][:email])
+      expect(json['message']).to eq('SUCCESS')
     end
   end
 
@@ -77,6 +80,7 @@ RSpec.describe 'Users', type: :request do
     it 'can update the user' do
       expect(json['data']['name']).to eq(@params[:user][:name])
       expect(json['data']['name']).not_to eq(@user.name)
+      expect(json['message']).to eq('SUCCESS')
     end
   end
 
