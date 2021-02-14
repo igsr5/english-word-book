@@ -2,8 +2,8 @@ class User < ApplicationRecord
   has_secure_password
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true
-  validates :password_confirmation, presence: true
+  validates :password, presence: true, on: :create
+  validates :password_confirmation, presence: true, on: :create
 
-  has_many :words
+  has_many :words, dependent: :destroy
 end
