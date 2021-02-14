@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Users', type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:users) { FactoryBot.create_list(:user, 10) }
+  let(:json) { JSON.parse(response.body) }
 
   context 'GET: /api/users' do
     before do
@@ -57,6 +58,28 @@ RSpec.describe 'Users', type: :request do
 
     it 'can create the user' do
       expect(@json['data']['email']).to eq(@params[:user][:email])
+    end
+  end
+
+  context 'PATCH: /api/users/:id' do
+    before do
+      @user = user
+      @params = {
+        user: {
+          name: '井上園子',
+          email: 'sonoko@example.com',
+        }
+      }
+      patch "/api/users/#{@user.id}", params: @params
+    end
+
+    it 'status is 200' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'can update the user' do
+      expect(json['data']['name']).to eq(@params[:user][:name])
+      expect(json['data']['name']).not_to eq(@user.name)
     end
   end
 end
