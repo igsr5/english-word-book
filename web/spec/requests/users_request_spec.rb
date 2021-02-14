@@ -35,4 +35,28 @@ RSpec.describe 'Users', type: :request do
       expect(@json['data']['id']).to eq(@user.id)
     end
   end
+
+  context 'POST: /api/users' do
+    before do
+      @params = {
+        user: {
+          name: '山田太郎',
+          email: 'taro@example.com',
+          password: 'password',
+          password_confirmation: 'password'
+        }
+      }
+
+      post '/api/users', params: @params
+      @json = JSON.parse(response.body)
+    end
+
+    it 'status is 200' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'can create the user' do
+      expect(@json['data']['email']).to eq(@params[:user][:email])
+    end
+  end
 end
