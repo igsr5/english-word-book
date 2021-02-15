@@ -1,1 +1,1 @@
-REDIS = Redis.new(url: 'redis://redis:6379')
+REDIS = Redis.new(url: Settings.redis.url)
