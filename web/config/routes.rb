@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   root "translates#index"
   namespace 'api' do
       resources :users
+      resources :auth, only: [:create]
   end
 end
