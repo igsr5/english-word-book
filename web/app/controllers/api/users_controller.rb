@@ -1,5 +1,6 @@
 module Api
   class UsersController < ApplicationController
+    skip_before_action :require_login, only: [:create]
     def index
       users = User.all
       render json: { data: users, message: 'SUCCESS'}
