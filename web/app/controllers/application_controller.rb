@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   @@session = {}
 
   def require_login
-    render json: { error: 'unauthorized' , status: :unauthorized } if @@session.blank?
+    render json: { error: 'unauthorized token' , status: 'unauthorized token' } if @@session.blank?
   end
 
   private
