@@ -4,11 +4,16 @@ RSpec.describe 'Users', type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:users) { FactoryBot.create_list(:user, 10) }
   let(:json) { JSON.parse(response.body) }
+  let(:token) { 'aaaaaaaaaaaaaaaaaaaaaaa' }
+
+  before do
+    REDIS.mapped_hmset(token, user_id: 1)
+  end
 
   context 'GET: /api/users' do
     before do
       users
-      get '/api/users'
+      get '/api/users', params: {}, headers: { 'Authorization' => "Token #{token}"}
     end
 
     it 'status is 200' do
@@ -21,10 +26,28 @@ RSpec.describe 'Users', type: :request do
     end
   end
 
+  context 'GET: /api/users' do
+    before do
+      users
+      get '/api/users', params: {}, headers: { Authorization: '' }
+    end
+
+    it 'status is 200' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'can get 10 users' do
+      expect(json['data'].length).to eq(10)
+      expect(json['message']).to eq('SUCCESS')
+    end
+  end
+
+
   context 'GET: api/uers/:id' do
     before do
       @user = user
-      get "/api/users/#{@user.id}"
+      get "/api/users/#{@user.id}", params: {}, headers: { 'Authorization' => "Token #{token}"}
+
     end
 
     it 'status is 200' do
@@ -70,7 +93,8 @@ RSpec.describe 'Users', type: :request do
           email: 'sonoko@example.com',
         }
       }
-      patch "/api/users/#{@user.id}", params: @params
+      patch "/api/users/#{@user.id}", params: @params, headers: { 'Authorization' => "Token #{token}"}
+
     end
 
     it 'status is 200' do
@@ -87,7 +111,7 @@ RSpec.describe 'Users', type: :request do
   context 'DELETE: /api/users/:id' do
     before do
       @user = user
-      delete "/api/users/#{@user.id}"
+      delete "/api/users/#{@user.id}", params: @params, headers: { 'Authorization' => "Token #{token}"}
     end
 
     it 'status is 200' do
