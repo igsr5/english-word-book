@@ -1,0 +1,2 @@
+class TransrateController < ApplicationController
+end
