@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   namespace 'api' do
       resources :users
       resources :auth, only: [:create]
+      resources :translate, only: [:create]
   end
 end
