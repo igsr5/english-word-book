@@ -1,3 +1,4 @@
 # CloudTranslation API KEY
-/config/google-cloud.json
-.env
+# /config/google-cloud.json
+# .env
+.DS_Store
