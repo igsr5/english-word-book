@@ -16,3 +16,4 @@ alias rubocop="docker-compose run -e RAILS_ENV=development --rm web bundle exec 
 alias rubocopa="docker-compose run -e RAILS_ENV=development --rm web bundle exec rubocop -a"
 alias yarn="docker-compose run --rm app yarn"
 alias npm="docker-compose run --rm app npm"
+alias vue="docker-compose run --rm app vue"
